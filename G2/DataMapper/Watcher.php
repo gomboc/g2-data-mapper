@@ -7,9 +7,13 @@ class G2_DataMapper_Watcher
 {
 	
 	private static $_instance;
+	
 	private $_all = array();
+	
 	private $_delete = array();
+	
 	private $_dirty = array();
+	
 	private $_new = array();
 		
 		
@@ -18,7 +22,7 @@ class G2_DataMapper_Watcher
 	/**
 	 * Singleton design pattern
 	 * 
-	 * @return My_Model_Watcher
+	 * @return G2_DataMapper_Watcher
 	 */
 	public static function getInstance()
 	{
@@ -29,9 +33,9 @@ class G2_DataMapper_Watcher
 	/**
 	 * 
 	 *
-	 * @param My_Model_Domain $model
+	 * @param G2_DataMapper_Domain $model
 	 */
-	public static function add( Model_Domain $obj )
+	public static function add( G2_DataMapper_Domain $obj )
 	{
 		$inst = self::getInstance();
 		$inst->_all[$inst->globalKey( $obj )] = $obj;
@@ -67,11 +71,11 @@ class G2_DataMapper_Watcher
 	/**
 	 * 
 	 * 
-	 * @param My_Model_Domain $obj
+	 * @param G2_DataMapper_Domain $obj
 	 * 
 	 * @return void
 	 */
-	public static function registerClean( Model_Domain $obj )
+	public static function registerClean( G2_DataMapper_Domain $obj )
 	{
 		$inst = self::getInstance();
 		
@@ -88,11 +92,11 @@ class G2_DataMapper_Watcher
 	/**
 	 * 
 	 * 
-	 * @param My_Model_Domain $obj
+	 * @param G2_DataMapper_Domain $obj
 	 * 
 	 * @return void
 	 */
-	public static function registerDelete( Model_Domain $obj )
+	public static function registerDelete( G2_DataMapper_Domain $obj )
 	{
 		$inst = self::getInstance();
 		$inst->_delete[$inst->globalKey( $obj )] = $obj;
@@ -102,11 +106,11 @@ class G2_DataMapper_Watcher
 	/**
 	 * 
 	 * 
-	 * @param My_Model_Domain $obj
+	 * @param G2_DataMapper_Domain $obj
 	 * 
 	 * @return void
 	 */
-	public static function registerDirty( Model_Domain $obj )
+	public static function registerDirty( G2_DataMapper_Domain $obj )
 	{
 		$inst = self::getInstance();
 		$inst->_dirty[$inst->globalKey( $obj )] = $obj;
@@ -116,11 +120,11 @@ class G2_DataMapper_Watcher
 	/**
 	 * 
 	 * 
-	 * @param My_Model_Domain $obj
+	 * @param G2_DataMapper_Domain $obj
 	 * 
 	 * @return void
 	 */
-	public static function registerNew( Model_Domain $obj )
+	public static function registerNew( G2_DataMapper_Domain $obj )
 	{
 		$inst = self::getInstance();
 		if( !in_array( $obj, $inst->_new, true ) ) $inst->_new[] = $obj;
@@ -151,7 +155,7 @@ class G2_DataMapper_Watcher
 				}							
 				unset( $inst->_new[$key] );	
 				$obj->setId( $id );
-				Model_Watcher::add( $obj );
+				G2_DataMapper_Watcher::add( $obj );
 			}
 		}
 		
@@ -188,9 +192,9 @@ class G2_DataMapper_Watcher
 	/**
 	 * 
 	 *
-	 * @param My_Model_Domain $model
+	 * @param G2_DataMapper_Domain $model
 	 */
-	private function globalKey( Model_Domain $obj )
+	private function globalKey( G2_DataMapper_Domain $obj )
 	{
 		return get_class( $obj ) . $obj->getId();
 	}
