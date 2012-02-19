@@ -9,12 +9,12 @@ class G2_DataMapper_Factory_Domain
 	 * @param array $data
 	 * @param boolean $domain - if it is called from child method (true)
 	 * 
-	 * @return Model_Domain
+	 * @return G2_DataMapper_Domain
 	 */	
 	public function createObject( $data = array() )
 	{
 		
-		$class = str_replace( 'Model_Factory_', 'Model_', get_class( $this ) );
+		$class = str_replace( 'G2_DataMapper_Factory_', 'G2_DataMapper_', get_class( $this ) );
 		
 		$domain = new $class();
 		

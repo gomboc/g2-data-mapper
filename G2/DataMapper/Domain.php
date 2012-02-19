@@ -21,7 +21,7 @@ class G2_DataMapper_Domain
 	{
 		if ( empty( $this->_mapper ) ) {
 			
-			$mapperName = str_replace( 'Model_Domain_', 'Model_Mapper_', get_class( $this ) );
+			$mapperName = str_replace( 'G2_DataMapper_Domain', 'G2_DataMapper_Mapper_', get_class( $this ) );
 			
 			$this->_mapper = new $mapperName();
 		}
@@ -31,25 +31,25 @@ class G2_DataMapper_Domain
 	
 	public function markClean()
 	{
-		Model_Watcher::registerClean( $this );
+		G2_DataMapper_Watcher::registerClean( $this );
 		return $this;
 	}
 	
 	public function markDelete()
 	{
-		Model_Watcher::registerDelete( $this );
+		G2_DataMapper_Watcher::registerDelete( $this );
 		return $this;		
 	}
 	
 	public function markDirty()
 	{
-		Model_Watcher::registerDirty( $this );
+		G2_DataMapper_Watcher::registerDirty( $this );
 		return $this;		
 	}	
 	
 	public function markNew()
 	{
-		Model_Watcher::registerNew( $this );	
+		G2_DataMapper_Watcher::registerNew( $this );	
 		return $this;
 	}
 	
@@ -74,7 +74,7 @@ class G2_DataMapper_Domain
 
 		if ( !is_null( $id ) ) {
 			$this->setId( $id );
-			Model_Watcher::add( $this );
+			G2_DataMapper_Watcher::add( $this );
 		}
 
 		return $this->id;
@@ -111,7 +111,7 @@ class G2_DataMapper_Domain
 		return $this;
 	}
 
-	public function setMapper( Model_Mapper $mapper = null )
+	public function setMapper( G2_DataMapper_Mapper $mapper = null )
 	{
 		$this->_mapper = $mapper;
 		return $this;

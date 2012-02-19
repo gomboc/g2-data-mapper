@@ -22,12 +22,12 @@ class G2_DataMapper_Mapper
 	}
 	
 
-	public function delete( Model_Domain $obj = null ) {
+	public function delete( G2_DataMapper_Domain $obj = null ) {
 //TODO: srediti ovo	
 	}
 	
 
-	public function findAll( Model_Identity $identity )
+	public function findAll( G2_DataMapper_Identity $identity )
 	{	
 		$this->_select( $identity );
 
@@ -35,7 +35,7 @@ class G2_DataMapper_Mapper
 	}
 	
 
-	public function findOne( Model_Identity $identity )
+	public function findOne( G2_DataMapper_Identity $identity )
 	{
 
 		$domain = $this->_getFromMap( $identity );
@@ -53,14 +53,14 @@ class G2_DataMapper_Mapper
 	public function getIdentity()
 	{
 		if ( empty( $this->_identity ) ) {
-			$this->_identity = new Model_Identity();
+			$this->_identity = new G2_DataMapper_Identity();
 		}
 		
 		return $this->_identity;
 	}
 		
 
-	public function insert( Model_Domain $obj )
+	public function insert( G2_DataMapper_Domain $obj )
 	{
 		$this->_rawData = $obj->toArray();
 		
@@ -80,7 +80,7 @@ class G2_DataMapper_Mapper
 	}
 	
 	
-	public function update( Model_Domain $obj )
+	public function update( G2_DataMapper_Domain $obj )
 	{
 //@todo srediti ovo
 		$this->_rawData = $obj->toArray();
@@ -103,7 +103,7 @@ class G2_DataMapper_Mapper
 
 	protected function _getFactoryDomain() 
 	{		
-		$factoryName = str_replace( 'Model_Mapper_', 'Model_Factory_Domain_', get_class( $this ) );
+		$factoryName = str_replace( 'G2_DataMapper_Mapper_', 'G2_DataMapper_Factory_Domain_', get_class( $this ) );
 	
 		return new $factoryName();
 	}
@@ -112,7 +112,7 @@ class G2_DataMapper_Mapper
 	protected function _getSelection()
 	{
 		if ( empty( $this->_selection ) ) {
-			$this->_selection = new Model_Selection();
+			$this->_selection = new G2_DataMapper_Selection();
 		}
 		
 		return $this->_selection;
@@ -124,7 +124,7 @@ class G2_DataMapper_Mapper
 		$collection = null;
 		
 		if ( count( $this->_rawData ) >= 1 ) {
-			$collection = new Model_Collection( $this->_rawData, $this->_getFactoryDomain() );
+			$collection = new G2_DataMapper_Collection( $this->_rawData, $this->_getFactoryDomain() );
 		} 
 				
 		return $collection;
@@ -143,7 +143,7 @@ class G2_DataMapper_Mapper
 	}
 	
 	
-	protected function _select( Model_Identity $identity = null )
+	protected function _select( G2_DataMapper_Identity $identity = null )
 	{
 		$select = $this->_db->select()
 						    ->from( $this->_table )
@@ -182,17 +182,17 @@ class G2_DataMapper_Mapper
 	}
 	
 
-	private function _getFromMap( Model_Identity $identity )
+	private function _getFromMap( G2_DataMapper_Identity $identity )
 	{
 		$id = $this->_getIdFromIdentity( $identity );
 	
-		$domainName = str_replace( 'Model_Mapper_', 'Model_Domain_', get_class( $this ) );
+		$domainName = str_replace( 'G2_DataMapper_Mapper_', 'G2_DataMapper_Domain_', get_class( $this ) );
 	
-		return Model_Watcher::exists( $domainName, $id );
+		return G2_DataMapper_Watcher::exists( $domainName, $id );
 	}
 	
 	
-	private function _getIdFromIdentity( Model_Identity $identity )
+	private function _getIdFromIdentity( G2_DataMapper_Identity $identity )
 	{
 		if ( is_array( $this->_indentityField ) ) {
 			

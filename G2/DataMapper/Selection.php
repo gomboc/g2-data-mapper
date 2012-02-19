@@ -4,7 +4,7 @@ class G2_DataMapper_Selection
 {
 	public function __construct() { }
 	
-	public function where( Model_Identity $obj = null) 
+	public function where( G2_DataMapper_Identity $obj = null) 
 	{	
 		if ( $obj->isVoid() ) return '1';		
 		$compstrings = array();
@@ -27,7 +27,7 @@ class G2_DataMapper_Selection
 		return $where;
 	}
 	
-	public function orderBy( Model_Identity $obj = null ) 
+	public function orderBy( G2_DataMapper_Identity $obj = null ) 
 	{	
 		$orderByArr = $obj->getOrderBy();
 	
@@ -44,7 +44,7 @@ class G2_DataMapper_Selection
 		return $result;
 	}
 
-	public function limit( Model_Identity $obj = null ) 
+	public function limit( G2_DataMapper_Identity $obj = null ) 
 	{	
 		$limit = $obj->getLimit();
 		

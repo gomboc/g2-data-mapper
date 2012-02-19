@@ -45,7 +45,7 @@ class G2_DataMapper_Identity
 		
 		if ( isset($this->_fields[$fieldname]) ) $this->_currentField=$this->_fields[$fieldname];
 		else {
-			$this->_currentField = new Model_Identity_Field( $fieldname );
+			$this->_currentField = new G2_DataMapper_Identity_Field( $fieldname );
 			$this->_fields[$fieldname]=$this->_currentField;
 		}
 		return $this;
