@@ -21,8 +21,9 @@ class G2_DataMapper_Identity
 	public function __construct( $field = null, array $enforce = null ) 
 	{	
 		if ( !is_null( $enforce ) ) {
-			$this->__enforce = $enforce;
+			$this->_enforce = $enforce;
 		}
+		
 		if ( !is_null( $field ) ) { 
 			$this->field( $field );	
 		}
@@ -31,19 +32,21 @@ class G2_DataMapper_Identity
 	public function eq( $value = null )
 	{
 		$this->_operator( "=", $value );
+		
 		return $this;
 	}
 	
 	public function neq( $value = null )
 	{
 		$this->_operator( "<>", $value );
+		
 		return $this;
 	}
 	
 	public function enforceField( $fieldname ) 
 	{
-		if ( !in_array( $fieldname, $this->_enforce ) && !empty( $this->__enforce ) ) {
-			$forcelist = implode(', ', $this->__enforce);
+		if ( !in_array( $fieldname, $this->_enforce ) && !empty( $this->_enforce ) ) {
+			$forcelist = implode( ', ', $this->_enforce );
 			throw new Exception("{$fieldname} not a legal field ($forcelist)");
 		}
 	}
@@ -87,7 +90,7 @@ class G2_DataMapper_Identity
 	
 	public function getObjectFields() 
 	{	
-		return $this->__enforce;
+		return $this->_enforce;
 	}
 	
 	public function getOffset() 
