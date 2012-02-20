@@ -2,19 +2,30 @@
 
 class G2_DataMapper_Identity
 {
-	protected $_currentField = null;
-	protected $_customContainer = array();
-	protected $_fields = array();	
-	protected $_limit = '';
-	protected $_offset = '';
-	protected $_orderBy = array();
+	
+	private $_currentField = null;
+	
+	private $_customContainer = array();
 	
 	private $_enforce = array();
 	
+	private $_fields = array();	
+	
+	private $_limit = '';
+	
+	private $_offset = '';
+	
+	private $_orderBy = array();
+		
+	
 	public function __construct( $field = null, array $enforce = null ) 
 	{	
-		if ( !is_null( $enforce ) ) $this->__enforce = $enforce;		
-		if ( !is_null( $field ) ) $this->field( $field );
+		if ( !is_null( $enforce ) ) {
+			$this->__enforce = $enforce;
+		}
+		if ( !is_null( $field ) ) { 
+			$this->field( $field );	
+		}
 	}
 	
 	public function eq( $value = null )

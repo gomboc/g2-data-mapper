@@ -2,50 +2,28 @@
 
 class G2_DataMapper_Collection implements Iterator, Countable
 {
-	/**
-	 * @var unknown_type
-	 */
-	protected $_factoryDomain;
+
+	private $_factoryDomain;
 	
-	/**
-	 * 
-	 * @var unknown_type
-	 */
-	protected $_raw = array();
-	
-	/**
-	 * 
-	 * @var unknown_type
-	 */
-	protected $_total = 0;
-	
-	/**
-	 * 
-	 * @var unknown_type
-	 */
 	private $_objects = array();
-	
-	/**
-	 * @var unknown_type
-	 */
+
 	private $_pointer = 0;
 	
-	/**
-	 * 
-	 * @var unknown_type
-	 */
+	private $_raw = array();
+
 	private $_result;
 	
+	private $_total = 0;
 	
-	public function __construct(array $raw = null, $factoryDomain = null)
+	
+	public function __construct( array $raw = null, $factoryDomain = null )
 	{
-		if ( !is_null($raw) && !is_null($factoryDomain) ) {
+		if ( !is_null( $raw ) && !is_null( $factoryDomain ) ) {
 			$this->_raw = $raw;
 			$this->_total = count($raw);
 		}
 
 		$this->_factoryDomain = $factoryDomain;
-		
 	}
 	
 	
@@ -54,10 +32,12 @@ class G2_DataMapper_Collection implements Iterator, Countable
 		return $this->_total;
 	}
 
-	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function current()
 	{
-		return $this->_getRow($this->_pointer);
+		return $this->_getRow( $this->_pointer );
 	}
 	
 	
@@ -78,18 +58,18 @@ class G2_DataMapper_Collection implements Iterator, Countable
 		return $this->_pointer;
 	}
 	
-	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function next()
 	{
-		
 		$row = $this->_getRow( $this->_pointer );
 
-		if ( !empty($row) ) { 
+		if ( !empty( $row ) ) { 
 			$this->_pointer++; 
 		}
 		
-		return $row;
-		
+		return $row;	
 	}
 	
 	
@@ -103,13 +83,14 @@ class G2_DataMapper_Collection implements Iterator, Countable
 	
 	public function valid()
 	{
-		return !is_null($this->current());
+		return !is_null( $this->current() );
 	}
 
-
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	private function _getRow( $num )
 	{
-	
 		if ( $num >= $this->_total || $num < 0 ) {
 			return null;
 		}
@@ -119,11 +100,10 @@ class G2_DataMapper_Collection implements Iterator, Countable
 		}
 
 		if ( isset( $this->_raw[$num] ) ) {
-			$this->_objects[$num] = $this->_factoryDomain->createObject($this->_raw[$num]);
+			$this->_objects[$num] = $this->_factoryDomain->createObject( $this->_raw[$num] );
 			return $this->_objects[$num];
 		}
 		
 		return null;
-		
 	}
 }

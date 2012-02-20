@@ -3,23 +3,24 @@
 class G2_DataMapper_Domain
 {
 	
-	public $id;	
+	protected $_id;	
 	
-	protected $_mapper = null;	
+	protected $_mapper;	
 	
 	
 	public function __construct( $id = null )
 	{
 		if ( !is_null( $id ) ) {
-			
 			$this->setId( $id );
 		}
 	}
 	
-				
+	/**
+	 * @return G2_DataMapper_Mapper
+	 */				
 	public function getMapper()
 	{
-		if ( empty( $this->_mapper ) ) {
+		if ( !$this->isMapperInstance() ) {
 			
 			$mapperName = str_replace( 'G2_DataMapper_Domain', 'G2_DataMapper_Mapper_', get_class( $this ) );
 			
@@ -29,46 +30,57 @@ class G2_DataMapper_Domain
 		return $this->_mapper;
 	}
 	
+	
+	public function isMapperInstance( $mapper )
+	{
+		return !empty( $mapper ) && $mapper instanceof G2_DataMapper_Mapper;
+	}
+	
+
 	public function markClean()
 	{
 		G2_DataMapper_Watcher::registerClean( $this );
-		return $this;
 	}
+	
 	
 	public function markDelete()
 	{
-		G2_DataMapper_Watcher::registerDelete( $this );
-		return $this;		
+		G2_DataMapper_Watcher::registerDelete( $this );	
 	}
+	
 	
 	public function markDirty()
 	{
-		G2_DataMapper_Watcher::registerDirty( $this );
-		return $this;		
+		G2_DataMapper_Watcher::registerDirty( $this );		
 	}	
 	
 	public function markNew()
 	{
 		G2_DataMapper_Watcher::registerNew( $this );	
-		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function saveDirty()
 	{
 		$mapper = $this->getMapper();
 		
-		if ( !empty( $mapper ) ) {
+		if ( $this->isMapperInstance() ) {
 			$mapper->update( $this );
 		}		
 
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function saveNew()
 	{
 		$mapper = $this->getMapper();
 		
-		if ( !empty( $mapper ) ) {
+		if ( $this->isMapperInstance() ) {
 			$id = $mapper->insert( $this );
 		}		
 
@@ -77,9 +89,12 @@ class G2_DataMapper_Domain
 			G2_DataMapper_Watcher::add( $this );
 		}
 
-		return $this->id;
+		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function setFromArray( array $data )
 	{
 		$filter = new Zend_Filter_Word_UnderscoreToCamelCase();
@@ -100,10 +115,13 @@ class G2_DataMapper_Domain
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function setFormData( Zend_Form $form )
 	{
 		if ( !$form->valid() ) {
-			throw new Exception( 'form not valid' );
+			throw new Exception( 'Form not valid', 1001 );
 		} 
 		
 		$this->setFromArray( $form->getValues() );
@@ -111,21 +129,28 @@ class G2_DataMapper_Domain
 		return $this;
 	}
 
-	public function setMapper( G2_DataMapper_Mapper $mapper = null )
+	public function setMapper( G2_DataMapper_Mapper $mapper )
 	{
 		$this->_mapper = $mapper;
+		
 		return $this;
 	}
 	
-	
-	public function setProperty( $property, $value ) {
-		
-		if( property_exists( get_class( $this), $property ) ) {	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
+	public function setProperty( $property, $value ) 
+	{	
+		if ( property_exists( get_class( $this), $property ) ) {	
 			$this->$property = $value;
 		}
+		
+		return $this;
 	}
 	
-	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function toArray()
 	{
 		$array = array();
@@ -149,37 +174,27 @@ class G2_DataMapper_Domain
 	}
 			
 	/**
-	 * Magic call method
-	 * Sets and returns object attributes
-	 * 
-	 * @param string $method
-	 * @param array $args
+	 * Setters and getters
 	 */
 	public function __call( $method, $args )
 	{
-		
         $methodType = substr( $method, 0, 3 );
         $paramName = strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 );
                   
         switch( $methodType ) {
             case 'set':
-                $this->$paramName = current($args);                
-                return $this;
+	                $this->$paramName = current($args);                
+	                return $this;
                 break;
             case 'get':
-            	return isset( $this->$paramName ) ? $this->$paramName : null;
+            		return isset( $this->$paramName ) ? $this->$paramName : null;
                 break;
         }        
 	}
 	
-	/**
-	 * Magic isset method
-	 * 
-	 * @param string $name
-	 */
+	
 	public function __isset( $name )
 	{
 		return key_exists( $name, get_object_vars( $this ) );
-	}
-	
+	}	
 }

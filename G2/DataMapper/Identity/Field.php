@@ -3,15 +3,16 @@
 class G2_DataMapper_Identity_Field
 {
 	
-	protected $_comps = array();
+	private $_comps = array();
 	
-	protected $_name = null;
+	private $_name = null;
 	
 	
 	function __construct( $name ) 
 	{	
 		$this->_name = $name;
 	}
+	
 	
 	function add( $operator, $value ) 
 	{	
@@ -20,10 +21,12 @@ class G2_DataMapper_Identity_Field
 		return $this;
 	}
 	
+	
 	function getComps() 
 	{ 	
 		return $this->_comps; 
 	}
+	
 	
 	function getCompEq()
 	{
@@ -38,9 +41,9 @@ class G2_DataMapper_Identity_Field
 		return null;
 	}
 	
+	
 	function isIncomplete() 
 	{ 
 		return empty( $this->_comps ); 
 	}
-	
 }

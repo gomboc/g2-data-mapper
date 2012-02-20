@@ -2,6 +2,7 @@
 
 	require_once( join( DIRECTORY_SEPARATOR, array( dirname( __FILE__ ), '../', 'G2', 'DataMapper.php' ) ) );
 
+	
 	$collection = new G2_DataMapper_Collection();
 	
 	$domain = new G2_DataMapper_Domain();
