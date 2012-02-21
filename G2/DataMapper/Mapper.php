@@ -5,13 +5,10 @@ class G2_DataMapper_Mapper
 
 	protected $_db;	
 	
-
 	protected $_selection = null;
 	
-
 	protected $_identity = null;
-	
-	
+		
 	protected $_rawData = array();
 	
 
@@ -26,7 +23,9 @@ class G2_DataMapper_Mapper
 //TODO: srediti ovo	
 	}
 	
-
+	/**
+	 * @return G2_DataMapper_Collection
+	 */
 	public function findAll( G2_DataMapper_Identity $identity )
 	{	
 		$this->_select( $identity );
@@ -34,10 +33,11 @@ class G2_DataMapper_Mapper
 		return $this->_returnCollection();		
 	}
 	
-
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	public function findOne( G2_DataMapper_Identity $identity )
 	{
-
 		$domain = $this->_getFromMap( $identity );
 		
 		if ( !is_null( $domain ) ) {
@@ -49,7 +49,9 @@ class G2_DataMapper_Mapper
 		return $this->_returnDomain();
 	}
 
-	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function getIdentity()
 	{
 		if ( empty( $this->_identity ) ) {
@@ -100,7 +102,9 @@ class G2_DataMapper_Mapper
 		return $result;
 	}
 	
-
+	/**
+	 * @return G2_DataMapper_Factory_Domain
+	 */
 	protected function _getFactoryDomain() 
 	{		
 		$factoryName = str_replace( 'G2_DataMapper_Mapper_', 'G2_DataMapper_Factory_Domain_', get_class( $this ) );
@@ -108,7 +112,9 @@ class G2_DataMapper_Mapper
 		return new $factoryName();
 	}
 	
-	
+	/**
+	 * @return G2_DataMapper_Selection
+	 */
 	protected function _getSelection()
 	{
 		if ( empty( $this->_selection ) ) {
@@ -118,7 +124,9 @@ class G2_DataMapper_Mapper
 		return $this->_selection;
 	}
 	
-	
+	/**
+	 * @return G2_DataMapper_Collection
+	 */
 	protected function _returnCollection()
 	{
 		$collection = null;
@@ -130,7 +138,9 @@ class G2_DataMapper_Mapper
 		return $collection;
 	}
 	
-	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
 	protected function _returnDomain()
 	{
 		$domain = null;

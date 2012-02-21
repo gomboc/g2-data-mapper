@@ -29,6 +29,9 @@ class G2_DataMapper_Identity
 		}
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function eq( $value = null )
 	{
 		$this->_operator( "=", $value );
@@ -36,6 +39,9 @@ class G2_DataMapper_Identity
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function neq( $value = null )
 	{
 		$this->_operator( "<>", $value );
@@ -47,34 +53,49 @@ class G2_DataMapper_Identity
 	{
 		if ( !in_array( $fieldname, $this->_enforce ) && !empty( $this->_enforce ) ) {
 			$forcelist = implode( ', ', $this->_enforce );
-			throw new Exception("{$fieldname} not a legal field ($forcelist)");
+			throw new Exception( "{$fieldname} is not a legal field ( $forcelist )", 1002 );
 		}
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function field( $fieldname ) 
 	{
-		if ( !$this->isVoid() && $this->_currentField->isIncomplete() ) throw new Exception( "Incomplete field" );
+		if ( !$this->isVoid() && $this->_currentField->isIncomplete() ) {
+			throw new Exception( "Incomplete field", 1003 );	
+		}
 		
 		$this->enforceField( $fieldname );
 		
-		if ( isset($this->_fields[$fieldname]) ) $this->_currentField=$this->_fields[$fieldname];
-		else {
+		if ( isset( $this->_fields[$fieldname] ) ) { 
+			$this->_currentField = $this->_fields[$fieldname];	
+		} else {
 			$this->_currentField = new G2_DataMapper_Identity_Field( $fieldname );
-			$this->_fields[$fieldname]=$this->_currentField;
+			$this->_fields[$fieldname] = $this->_currentField;
 		}
+		
 		return $this;
 	}
 	
-	public function gt( $value = null)
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
+	public function gt( $value = null )
 	{
 		$this->_operator( ">", $value );
+		
 		return $this;
 	}
 	
 	public function getComps() 
 	{	
 		$ret = array();
-		foreach ( $this->_fields as $key => $field ) $ret = array_merge( $ret, $field->getComps() );
+		
+		foreach ( $this->_fields as $key => $field ) {
+			$ret = array_merge( $ret, $field->getComps() );	
+		}
+		
 		return $ret;
 	}
 	
@@ -103,9 +124,13 @@ class G2_DataMapper_Identity
 		return $this->_orderBy;	
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function in( $array = array() )
 	{		
 		$this->_operator( "IN", '(' . join( ',', $array ) . ')' );
+		
 		return $this;
 	}
 	
@@ -114,24 +139,39 @@ class G2_DataMapper_Identity
 		return empty( $this->_fields );
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function lt( $value = null )
 	{
 		$this->_operator( "<", $value );
+		
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function le( $value = null )
 	{
 		$this->_operator( "<=", $value );
+		
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function ge( $value = null )
 	{
 		$this->_operator( ">=", $value );
+		
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function setLimit( $value ) 
 	{	
 		$this->_limit = $value;	
@@ -139,22 +179,23 @@ class G2_DataMapper_Identity
 		return $this;
 	}
 	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
 	public function setOffset($value) 
 	{
 		$this->_offset = $value;
-	}
-	
-	public function setOrderBy( $param, $value ) 
-	{	
-		$this->_orderBy[$param] = $value;	
 		
 		return $this;
 	}
 	
-	protected function _operator($symbol, $value) 
-	{
-		if ( $this->isVoid() ) throw new Exception("no object field defined");
-		$this->_currentField->add( $symbol, $value );
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
+	public function setOrderBy( $param, $value ) 
+	{	
+		$this->_orderBy[$param] = $value;	
+		
 		return $this;
 	}
 	
@@ -165,11 +206,25 @@ class G2_DataMapper_Identity
 
 		switch ( $method[1] ) {
 			case 'set' :
-				$this->_customContainer[$method[2]] = $args[0];
+					$this->_customContainer[$method[2]] = $args[0];
 				break;
 			case 'get' :
-				return isset( $this->_customContainer[$method[2]] ) ? $this->_customContainer[$method[2]] : null;
+					return isset( $this->_customContainer[$method[2]] ) ? $this->_customContainer[$method[2]] : null;
 				break;
 		}		
+	}
+	
+	/**
+	 * @return G2_DataMapper_Identity
+	 */
+	protected function _operator($symbol, $value) 
+	{
+		if ( $this->isVoid() ) {
+			throw new Exception( "No object field defined", 1004 );	
+		}
+		
+		$this->_currentField->add( $symbol, $value );
+		
+		return $this;
 	}
 }

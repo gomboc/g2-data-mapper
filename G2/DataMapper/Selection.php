@@ -2,12 +2,16 @@
 
 class G2_DataMapper_Selection
 {
-	public function __construct() { }
+
 	
 	public function where( G2_DataMapper_Identity $obj = null) 
 	{	
-		if ( $obj->isVoid() ) return '1';		
+		if ( $obj->isVoid() ) {
+			return '1';	
+		}
+		
 		$compstrings = array();
+		
 		foreach ( $obj->getComps() as $comp ) {
 			
 			if ($comp['operator'] != 'IN') {
@@ -22,10 +26,12 @@ class G2_DataMapper_Selection
 				$compstrings[] = "{$comp['name']} {$comp['operator']} {$comp['value']}";
 			}
 		}		
+		
 		$where = implode( " AND ", $compstrings );
 
 		return $where;
 	}
+	
 	
 	public function orderBy( G2_DataMapper_Identity $obj = null ) 
 	{	
@@ -44,6 +50,7 @@ class G2_DataMapper_Selection
 		return $result;
 	}
 
+	
 	public function limit( G2_DataMapper_Identity $obj = null ) 
 	{	
 		$limit = $obj->getLimit();

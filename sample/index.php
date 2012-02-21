@@ -11,7 +11,9 @@
 	
 	echo $domain->getId();
 	
-	$collection = new G2_DataMapper_Identity();
+	$identity = new G2_DataMapper_Identity();
+	
+	$identity->setXyz( 1 );
 	
 	$mapper = new G2_DataMapper_Mapper();
 	
