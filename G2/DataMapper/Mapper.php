@@ -129,11 +129,7 @@ class G2_DataMapper_Mapper
 	 */
 	protected function _returnCollection()
 	{
-		$collection = null;
-		
-		if ( count( $this->_rawData ) >= 1 ) {
-			$collection = new G2_DataMapper_Collection( $this->_rawData, $this->_getFactoryDomain() );
-		} 
+		$collection = new G2_DataMapper_Collection( $this->_rawData, $this->_getFactoryDomain() );
 				
 		return $collection;
 	}

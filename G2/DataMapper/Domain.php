@@ -105,7 +105,9 @@ class G2_DataMapper_Domain
 				
 				if( !is_null( $value ) ) {
 					
-					$property = lcfirst( $filter->filter( $key ) );
+					$property = $filter->filter( $key );
+					
+					$property[0] = strtolower( $property[0] );
 	
 					$this->setProperty( $property, $value );
 				}

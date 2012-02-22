@@ -138,6 +138,16 @@ class G2_DataMapper_Identity
 	{
 		return empty( $this->_fields );
 	}
+
+	/**
+	 * @return G2_DataMapper_Identity
+	 */	
+	public function like( $value = null )
+	{
+		$this->_operator( "LIKE", $value );
+		
+		return $this;		
+	}
 	
 	/**
 	 * @return G2_DataMapper_Identity
