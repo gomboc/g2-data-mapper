@@ -23,7 +23,18 @@ class G2_DataMapper
 			$this->setDbAdapter( $dbAdapter );
 		}
 	}
-	
+		
+	/**
+	 * @return G2_DataMapper
+	 */
+	public static function getInstance()
+	{
+		if ( empty( self::$_instance ) ) {
+			self::$_instance = new G2_DataMapper();	
+		}
+		
+		return self::$_instance;
+	}
 	
 	public function getDbAdapter()
 	{
