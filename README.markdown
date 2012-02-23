@@ -4,6 +4,12 @@ DataMapper
 
 DataMapper is an object-relational mapper library written in PHP.
 
+Contributors
+------------
+
+* [[Draško Gomboc|https://github.com/gomboc]]
+* [[Ivan Kričković|https://github.com/ivankoni]]
+
 Requirements
 ------------
 
