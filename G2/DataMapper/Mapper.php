@@ -107,7 +107,7 @@ class G2_DataMapper_Mapper
 	 */
 	protected function _getFactoryDomain() 
 	{		
-		$factoryName = str_replace( 'G2_DataMapper_Mapper_', 'G2_DataMapper_Factory_Domain_', get_class( $this ) );
+		$factoryName = str_replace( 'Model_Mapper_', 'Model_Factory_Domain_', get_class( $this ) );
 	
 		return new $factoryName();
 	}
@@ -192,7 +192,7 @@ class G2_DataMapper_Mapper
 	{
 		$id = $this->_getIdFromIdentity( $identity );
 	
-		$domainName = str_replace( 'G2_DataMapper_Mapper_', 'G2_DataMapper_Domain_', get_class( $this ) );
+		$domainName = str_replace( 'Model_Mapper_', 'Model_Domain_', get_class( $this ) );
 	
 		return G2_DataMapper_Watcher::exists( $domainName, $id );
 	}

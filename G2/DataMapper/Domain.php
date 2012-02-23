@@ -16,13 +16,13 @@ class G2_DataMapper_Domain
 	}
 	
 	/**
-	 * @return G2_DataMapper_Mapper
+	 * @return Model_Mapper
 	 */				
 	public function getMapper()
 	{
 		if ( !$this->isMapperInstance() ) {
 			
-			$mapperName = str_replace( 'G2_DataMapper_Domain', 'G2_DataMapper_Mapper_', get_class( $this ) );
+			$mapperName = str_replace( 'Model_Domain', 'Model_Mapper_', get_class( $this ) );
 			
 			$this->_mapper = new $mapperName();
 		}
@@ -131,7 +131,7 @@ class G2_DataMapper_Domain
 		return $this;
 	}
 
-	public function setMapper( G2_DataMapper_Mapper $mapper )
+	public function setMapper( Model_Mapper $mapper )
 	{
 		$this->_mapper = $mapper;
 		
