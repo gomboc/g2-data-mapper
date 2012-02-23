@@ -14,7 +14,7 @@ Requirements
 ------------
 
 * PHP 5.2 (or later) but PHP 5.3 (or later) is highly recommended.
-* Zend Framework 1.11
+* Zend Framework 1.9 (or later)
 
 Installation
 ------------
