@@ -14,13 +14,15 @@ class G2_DataMapper_Mapper
 
 	public function __construct()
 	{		
-//TODO: uopstiti registraciju db adaptera		
-		//$this->_db = Zend_Controller_Front::getInstance()->getParam( 'bootstrap' )->getPluginResource( 'db' )->getDbAdapter();
+		$this->_db = G2_DataMapper::getInstance()->getDbAdapter();
 	}
 	
 
-	public function delete( G2_DataMapper_Domain $obj = null ) {
-//TODO: srediti ovo	
+	public function delete( G2_DataMapper_Domain $obj = null ) 
+	{	
+		$where = 'id = ' . $this->_db->quote( $obj->getId() );
+		
+		return $this->_db->delete( $this->_table, $where );
 	}
 	
 	/**

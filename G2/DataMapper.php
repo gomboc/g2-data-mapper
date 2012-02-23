@@ -12,6 +12,8 @@ if ( !defined( 'G2_DATAMAPPER_ROOT' ) ) {
 class G2_DataMapper
 {
 	
+	private static $_instance;
+	
 	private $_dbAdapter;
 	
 	
