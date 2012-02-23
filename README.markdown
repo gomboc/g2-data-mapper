@@ -2,6 +2,8 @@
 DataMapper
 ==========
 
+DataMapper is an object-relational mapper library written in PHP.
+
 Requirements
 ------------
 
