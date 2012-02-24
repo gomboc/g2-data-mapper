@@ -36,6 +36,7 @@ class G2_DataMapper
 		return self::$_instance;
 	}
 	
+	
 	public function getDbAdapter()
 	{
 		return $this->_dbAdapter;
@@ -50,5 +51,4 @@ class G2_DataMapper
 		
 		return $this;
 	}
-	
 } 
