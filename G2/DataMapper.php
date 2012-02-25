@@ -19,6 +19,8 @@ class G2_DataMapper
 	
 	public function __construct( $dbAdapter = null )
 	{
+		self::$_instance = $this;
+
 		if ( !is_null( $dbAdapter ) ) {
 			$this->setDbAdapter( $dbAdapter );
 		}
@@ -32,7 +34,7 @@ class G2_DataMapper
 		if ( empty( self::$_instance ) ) {
 			self::$_instance = new G2_DataMapper();	
 		}
-		
+	
 		return self::$_instance;
 	}
 	

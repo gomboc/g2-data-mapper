@@ -13,7 +13,7 @@ class G2_DataMapper_Mapper
 	
 
 	public function __construct()
-	{		
+	{				
 		$this->_db = G2_DataMapper::getInstance()->getDbAdapter();
 	}
 	
