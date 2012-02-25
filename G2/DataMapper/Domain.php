@@ -97,19 +97,12 @@ class G2_DataMapper_Domain
 	 */
 	public function setFromArray( array $data )
 	{
-		$filter = new Zend_Filter_Word_UnderscoreToCamelCase();
-
 		if ( !empty( $data ) ) {
 			
 			foreach ( $data as $key => $value ) {
 				
 				if( !is_null( $value ) ) {
-					
-					$property = $filter->filter( $key );
-					
-					$property[0] = strtolower( $property[0] );
-	
-					$this->setProperty( $property, $value );
+					$this->setProperty( $this->_getPropertyName( $key ), $value );
 				}
 			}
 		}
@@ -199,4 +192,16 @@ class G2_DataMapper_Domain
 	{
 		return key_exists( $name, get_object_vars( $this ) );
 	}	
+	
+	
+	private function _getPropertyName( $name )
+	{
+		$filter = new Zend_Filter_Word_UnderscoreToCamelCase();
+		
+		$property = $filter->filter( $name );
+					
+		$property[0] = strtolower( $property[0] );
+		
+		return '_' . $property;
+	}
 }

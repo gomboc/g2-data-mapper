@@ -12,18 +12,25 @@ class G2_DataMapper_Factory_Domain
 	 * @return G2_DataMapper_Domain
 	 */	
 	public function createObject( $data = array() )
-	{
-		
-		$class = str_replace( 'G2_DataMapper_Factory_', 'G2_DataMapper_', get_class( $this ) );
-		
-		$domain = new $class();
-		
+	{		
 		if ( empty( $data ) ) {
 			return null;
 		}
+		
+		$domain = $this->_getDomainInstance();
 	
 		$domain->setFromArray( $data );
 	
 		return $domain;
+	}
+	
+	/**
+	 * @return G2_DataMapper_Domain
+	 */
+	private function _getDomainInstance()
+	{
+		$domain = str_replace( 'Model_Factory_', 'Model_', get_class( $this ) );
+		
+		return new $domain();
 	}
 }
