@@ -7,5 +7,10 @@ class Model_Mapper_User extends G2_DataMapper_Mapper
 	
 	protected $_table = 'user';
 	
+	protected $_columns = array(
+		'name',
+		'email'
+	);
+	
 	
 }

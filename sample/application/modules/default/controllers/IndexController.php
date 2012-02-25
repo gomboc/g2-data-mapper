@@ -17,6 +17,11 @@ class IndexController extends Zend_Controller_Action
 		$domain = $mapper->findOne( $identity );
 
 		var_dump( $domain );
+		
+//		$domain = new Model_Domain_User();
+//		$domain->setName('ivan')->setEmail('gmail');
+//		
+//		$domain->saveNew();
     }
 
 
