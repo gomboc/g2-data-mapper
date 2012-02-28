@@ -15,6 +15,20 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
     }
     
     
+    public function tearDown()
+    {
+    	unset( $this->_user );
+    	
+    	parent::tearDown();
+    }
+    
+    
+    public function testExtends()
+    {
+    	$this->assertInstanceOf( 'G2_DataMapper_Domain', $this->_user );	
+    }
+    
+    
     public function testMagicCall()
     {
     	$email = 'drasko.gomboc@gmail.com';
