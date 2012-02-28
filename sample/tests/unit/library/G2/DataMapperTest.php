@@ -19,6 +19,13 @@ class G2_DataMapperTest extends PHPUnit_Framework_TestCase
     }
     
     
+    public function tearDown()
+    {
+    	unset( $this->_zendDbAdapter );
+    	
+    	parent::tearDown();
+    }
+    
     public function testConst()
     {
     	$this->assertTrue( defined( 'G2_DATAMAPPER_ROOT' ) );
@@ -55,6 +62,7 @@ class G2_DataMapperTest extends PHPUnit_Framework_TestCase
     	
     	$this->assertEquals( $this->_zendDbAdapter, $dataMapper->getDbAdapter() );
     }
+    
     
     public function testRequireAutoloader()
     {
