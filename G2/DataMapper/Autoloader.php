@@ -3,10 +3,12 @@
 class G2_DataMapper_Autoloader
 {
 
+	
 	public static function register()
 	{
 		return spl_autoload_register( array( __CLASS__, 'autoload' ) );
 	}
+	
 	
 	public static function autoload( $class )
 	{				
@@ -24,5 +26,4 @@ class G2_DataMapper_Autoloader
 		
 		require_once( $classFilePath );
 	}
-
 }
