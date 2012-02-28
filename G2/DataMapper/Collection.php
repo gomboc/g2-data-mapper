@@ -16,9 +16,9 @@ class G2_DataMapper_Collection implements Iterator, Countable
 	private $_total = 0;
 	
 	
-	public function __construct( array $raw = null, $factoryDomain = null )
-	{
-		if ( !is_null( $raw ) && !is_null( $factoryDomain ) ) {
+	public function __construct( array $raw = null, G2_DataMapper_Factory_Domain $factoryDomain )
+	{		
+		if ( !is_null( $raw ) ) {
 			$this->_raw = $raw;
 			$this->_total = count($raw);
 		}

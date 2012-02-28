@@ -172,9 +172,9 @@ class G2_DataMapper_Domain
 	 * Setters and getters
 	 */
 	public function __call( $method, $args )
-	{
+	{		
         $methodType = substr( $method, 0, 3 );
-        $paramName = strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 );
+        $paramName = '_' . strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 );
                   
         switch( $methodType ) {
             case 'set':
