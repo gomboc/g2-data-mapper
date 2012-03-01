@@ -11,9 +11,7 @@ class G2_DataMapper_AutoloaderTest extends PHPUnit_Framework_TestCase
 	
 	
 	public function testRegister()
-	{
-		G2_DataMapper_Autoloader::register();
-		
+	{		
 		$this->assertTrue( in_array( array( 'G2_DataMapper_Autoloader', 'autoload' ), spl_autoload_functions() ) );
 	}
 	
