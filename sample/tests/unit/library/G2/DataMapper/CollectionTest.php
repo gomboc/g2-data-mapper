@@ -4,8 +4,28 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 {
 	
 	
+	public $_data = array( 
+		array( 
+			'id' => 1,
+			'name' => 'Drasko' 
+		),
+		array(
+			'id' => 2,
+			'name' => 'Gomboc'
+		),
+		array(
+			'id' => 3,
+			'name' => 'Drasko Gomboc'
+		)
+	);
+	
+	public $_collection;
+	
+	
 	public function setUp()
 	{
+		$this->_collection = new G2_DataMapper_Collection( $this->_data, new Model_Factory_Domain_User() );
+		
 		parent::setUp();
 	}
 	
@@ -16,18 +36,21 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 		
 		$this->assertEquals( array(), $collection->getRawData() );
 		
+		$this->assertInstanceOf( 'Iterator', $collection );
+		
+		$this->assertInstanceOf( 'Countable', $collection );
+		
 		foreach ( $collection as $domain ) {
 		}
 	}
 	
-	/**
-	 * @group construct
-	 */
+	
 	public function testConstructWithRawData()
 	{
 		$data = array( 
 			array( 
-				'id' => 1 
+				'id' => 1,
+				'name' => 'Drasko' 
 			) 
 		);
 		
@@ -40,16 +63,42 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 			$this->assertInstanceOf( 'Model_Domain_User', $domain );
 			
 			$this->assertEquals( 1, $domain->getId() );
+			
+			$this->assertEquals( 'Drasko', $domain->getName() );
 		}
 	}
 	
-	
-	public function testImplements()
+	/**
+	 * @group current
+	 */
+	public function testIteration()
 	{
-		$collection = new G2_DataMapper_Collection( null, new G2_DataMapper_Factory_Domain() );
+		$domain = $this->_collection->current();
 		
-		$this->assertInstanceOf( 'Iterator', $collection );
+		$this->assertEquals( $this->_data[0], array( 'id' => $domain->getId(), 'name' => $domain->getName() ) );
 		
-		$this->assertInstanceOf( 'Countable', $collection );
+		$this->assertEquals( 0, $this->_collection->key() );
+		
+		$this->assertTrue( $this->_collection->valid() );
+		
+		
+		$domain = $this->_collection->next();
+		
+		$this->assertEquals( $this->_data[0], array( 'id' => $domain->getId(), 'name' => $domain->getName() ) );
+		
+		$this->assertEquals( 1, $this->_collection->key() );
+		
+		
+		$domain = $this->_collection->rewind();
+		
+		$this->assertEquals( 0, $this->_collection->key() );
+	}
+	
+	
+	public function testCount()
+	{		
+		$this->assertEquals( 3, count( $this->_collection ) );
+		$this->assertEquals( 3, $this->_collection->count() );
+		$this->assertEquals( 3, $this->_collection->getTotal() );
 	}
 }
