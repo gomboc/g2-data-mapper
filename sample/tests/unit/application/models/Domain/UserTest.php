@@ -22,9 +22,7 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
     	parent::tearDown();
     }
     
-    /**
-	 * @group current
-	 */
+    
     public function testMagicCall()
     {
     	$lastName = 'Gomboc';

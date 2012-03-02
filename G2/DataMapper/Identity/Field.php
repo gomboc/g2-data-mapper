@@ -30,7 +30,7 @@ class G2_DataMapper_Identity_Field
 	
 	function getCompEq()
 	{
-		if ( !empty( $this->_comps ) ) {
+		if ( !$this->isIncomplete() ) {
 			foreach ( $this->_comps as $comp ) {
 				if ( $comp['operator'] == '=' ) {
 					return $comp['value'];
