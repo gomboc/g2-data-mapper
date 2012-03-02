@@ -102,7 +102,7 @@ class G2_DataMapper_Domain
 			foreach ( $data as $key => $value ) {
 				
 				if( !is_null( $value ) ) {
-					$this->setProperty( $this->_getPropertyName( $key ), $value );
+					$this->setProperty( $this->_underscoreToCamelCase( $key ), $value );
 				}
 			}
 		}
@@ -154,17 +154,16 @@ class G2_DataMapper_Domain
 		
         if ( !empty( $vars ) ) {
 			
-			$filter = new Zend_Filter_Word_CamelCaseToUnderscore();
 			
 			foreach ( $vars as $key => $value ) {
 				
 				if ( !is_null( $value ) ) {
 					
-					$array[strtolower( $filter->filter( $key ) ) ] = $value;
+					$array[ $this->_camelCaseToUnderscore( $key ) ] = $value;
 				} 
 			}
 		}
-		
+	
 		return $array;
 	}
 			
@@ -175,7 +174,7 @@ class G2_DataMapper_Domain
 	{		
         $methodType = substr( $method, 0, 3 );
         $paramName = '_' . strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 );
-                  
+        
         switch( $methodType ) {
             case 'set':
 	                $this->$paramName = current($args);                
@@ -194,7 +193,15 @@ class G2_DataMapper_Domain
 	}	
 	
 	
-	private function _getPropertyName( $name )
+	private function _camelCaseToUnderscore( $name )
+	{
+		$filter = new Zend_Filter_Word_CamelCaseToUnderscore();
+			
+		return substr( strtolower( $filter->filter( $name ) ), 1 );
+	}
+	
+	
+	private function _underscoreToCamelCase( $name )
 	{
 		$filter = new Zend_Filter_Word_UnderscoreToCamelCase();
 		

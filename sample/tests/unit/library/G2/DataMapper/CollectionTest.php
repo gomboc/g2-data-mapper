@@ -68,9 +68,7 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 		}
 	}
 	
-	/**
-	 * @group current
-	 */
+	
 	public function testIteration()
 	{
 		$domain = $this->_collection->current();

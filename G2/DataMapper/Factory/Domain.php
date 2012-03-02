@@ -2,13 +2,7 @@
 
 class G2_DataMapper_Factory_Domain
 {	
-	/**
-	 * Instatiate specific domain model object
-	 * Populates obj properties with data from db
-	 * 
-	 * @param array $data
-	 * @param boolean $domain - if it is called from child method (true)
-	 * 
+	/** 
 	 * @return G2_DataMapper_Domain
 	 */	
 	public function createObject( $data = array() )
