@@ -27,12 +27,12 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
 	 */
     public function testMagicCall()
     {
-    	$name = 'Drasko';
+    	$lastName = 'Gomboc';
     	
     	$this->assertInstanceOf( 'G2_DataMapper_Domain', $this->_user );
     	
-    	$this->_user->setName( $name );
+    	$this->_user->setLastName( $lastName );
     	
-    	$this->assertEquals( $name, $this->_user->getName() );
+    	$this->assertEquals( $lastName, $this->_user->getLastName() );
     }
 }

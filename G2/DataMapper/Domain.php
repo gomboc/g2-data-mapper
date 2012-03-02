@@ -172,7 +172,7 @@ class G2_DataMapper_Domain
 	{		
         $methodType = substr( $method, 0, 3 );
         $paramName = '_' . strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 );
-        
+       
         switch( $methodType ) {
             case 'set':
 	                $this->$paramName = current($args);                
