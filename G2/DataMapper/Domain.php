@@ -154,11 +154,9 @@ class G2_DataMapper_Domain
 		
         if ( !empty( $vars ) ) {
 			
-			
 			foreach ( $vars as $key => $value ) {
 				
 				if ( !is_null( $value ) ) {
-					
 					$array[ $this->_camelCaseToUnderscore( $key ) ] = $value;
 				} 
 			}

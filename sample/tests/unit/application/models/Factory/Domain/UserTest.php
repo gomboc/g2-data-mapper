@@ -13,9 +13,7 @@ class Model_Factory_Domain_UserTest extends PHPUnit_Framework_TestCase
 		$this->_factoryDomain = new Model_Factory_Domain_User();
 	}
 	
-	/**
-	 * @group current
-	 */
+	
 	public function testCreateObject()
 	{
 		$data = array(
@@ -23,6 +21,8 @@ class Model_Factory_Domain_UserTest extends PHPUnit_Framework_TestCase
 			'name' => 'Drasko',
 			'email' => 'email' 
 		);
+		
+		$this->assertInstanceOf( 'G2_DataMapper_Factory_Domain', $this->_factoryDomain );
 		
 		$domain = $this->_factoryDomain->createObject( $data );
 		
