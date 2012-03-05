@@ -1,5 +1,8 @@
 <?php 
 
+/**
+ * @group collection
+ */
 class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 {
 	
@@ -29,43 +32,33 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 		parent::setUp();
 	}
 	
-	
-	public function testConstructWithNoData()
+
+	public function testAssociativeArrayData()
 	{
-		$collection = new G2_DataMapper_Collection( null, new G2_DataMapper_Factory_Domain() );
+		$data = array(
+			'one' => array( 
+				'id' => 1,
+				'name' => 'Drasko'
+			),
+			'two' => array(
+				'id' => 2,
+				'name' => 'Gomboc'
+			)
+		);
 		
-		$this->assertEquals( array(), $collection->getRawData() );
+		$collection  = new G2_DataMapper_Collection( $data, new Model_Factory_Domain_User() );
 		
-		$this->assertInstanceOf( 'Iterator', $collection );
+		$this->assertInstanceOf( 'Model_Domain_User', $collection->next() );
 		
-		$this->assertInstanceOf( 'Countable', $collection );
-		
-		foreach ( $collection as $domain ) {
-		}
+		$this->assertEquals( 2, $collection->current()->getId() );
 	}
 	
 	
-	public function testConstructWithRawData()
-	{
-		$data = array( 
-			array( 
-				'id' => 1,
-				'name' => 'Drasko' 
-			) 
-		);
-		
-		$collection = new G2_DataMapper_Collection( $data, new Model_Factory_Domain_User() );
-		
-		$this->assertEquals( $data, $collection->getRawData() );
-		
-		foreach ( $collection as $domain ) {
-			
-			$this->assertInstanceOf( 'Model_Domain_User', $domain );
-			
-			$this->assertEquals( 1, $domain->getId() );
-			
-			$this->assertEquals( 'Drasko', $domain->getName() );
-		}
+	public function testCount()
+	{		
+		$this->assertEquals( 3, count( $this->_collection ) );
+		$this->assertEquals( 3, $this->_collection->count() );
+		$this->assertEquals( 3, $this->_collection->getTotal() );
 	}
 	
 	
@@ -91,12 +84,43 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 		
 		$this->assertEquals( 0, $this->_collection->key() );
 	}
+		
+	
+	public function testWithNoData()
+	{
+		$collection = new G2_DataMapper_Collection( null, new G2_DataMapper_Factory_Domain() );
+		
+		$this->assertEquals( array(), $collection->getRawData() );
+		
+		$this->assertInstanceOf( 'Iterator', $collection );
+		
+		$this->assertInstanceOf( 'Countable', $collection );
+		
+		foreach ( $collection as $domain ) {
+		}
+	}
 	
 	
-	public function testCount()
-	{		
-		$this->assertEquals( 3, count( $this->_collection ) );
-		$this->assertEquals( 3, $this->_collection->count() );
-		$this->assertEquals( 3, $this->_collection->getTotal() );
+	public function testWithRawData()
+	{
+		$data = array( 
+			array( 
+				'id' => 1,
+				'name' => 'Drasko' 
+			) 
+		);
+		
+		$collection = new G2_DataMapper_Collection( $data, new Model_Factory_Domain_User() );
+		
+		$this->assertEquals( $data, $collection->getRawData() );
+		
+		foreach ( $collection as $domain ) {
+			
+			$this->assertInstanceOf( 'Model_Domain_User', $domain );
+			
+			$this->assertEquals( 1, $domain->getId() );
+			
+			$this->assertEquals( 'Drasko', $domain->getName() );
+		}
 	}
 }

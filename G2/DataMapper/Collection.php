@@ -5,6 +5,8 @@ class G2_DataMapper_Collection implements Iterator, Countable
 
 	private $_factoryDomain;
 	
+	private $_keyMap = array();
+	
 	private $_objects = array();
 
 	private $_pointer = 0;
@@ -19,8 +21,10 @@ class G2_DataMapper_Collection implements Iterator, Countable
 	public function __construct( array $raw = null, G2_DataMapper_Factory_Domain $factoryDomain )
 	{		
 		if ( !is_null( $raw ) ) {
+			
 			$this->_raw = $raw;
 			$this->_total = count($raw);
+			$this->_keyMap = array_keys( $raw );
 		}
 
 		$this->_factoryDomain = $factoryDomain;
@@ -86,6 +90,12 @@ class G2_DataMapper_Collection implements Iterator, Countable
 		return !is_null( $this->current() );
 	}
 
+	
+	private function _createObject( $num )
+	{	
+		return $this->_factoryDomain->createObject( $this->_raw[$this->_keyMap[$num]] );
+	}
+	
 	/**
 	 * @return G2_DataMapper_Domain
 	 */
@@ -99,8 +109,8 @@ class G2_DataMapper_Collection implements Iterator, Countable
 			return $this->_objects[$num];
 		}
 
-		if ( isset( $this->_raw[$num] ) ) {
-			$this->_objects[$num] = $this->_factoryDomain->createObject( $this->_raw[$num] );
+		if ( isset( $this->_raw[ $this->_keyMap[$num] ] ) ) {
+			$this->_objects[$num] = $this->_createObject( $num );
 			return $this->_objects[$num];
 		}
 		
