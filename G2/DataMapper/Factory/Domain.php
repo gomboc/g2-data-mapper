@@ -12,7 +12,7 @@ class G2_DataMapper_Factory_Domain
 		}
 		
 		$domain = $this->_getDomainInstance();
-	
+
 		$domain->setFromArray( $data );
 	
 		return $domain;

@@ -136,8 +136,10 @@ class G2_DataMapper_Domain
 	 */
 	public function setProperty( $property, $value ) 
 	{	
-		if ( property_exists( get_class( $this), $property ) ) {	
-			$this->$property = $value;
+		$paramName = $this->_withPrefix( $property );
+
+		if ( property_exists( get_class( $this), $paramName ) ) {	
+			$this->$paramName = $value;
 		}
 		
 		return $this;
@@ -171,7 +173,7 @@ class G2_DataMapper_Domain
 	public function __call( $method, $args )
 	{		
         $methodType = substr( $method, 0, 3 );
-        $paramName = '_' . strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 );
+        $paramName = $this->_withPrefix( strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 ) );
        
         switch( $methodType ) {
             case 'set':
@@ -186,8 +188,8 @@ class G2_DataMapper_Domain
 	
 	
 	public function __isset( $name )
-	{
-		return key_exists( $name, get_object_vars( $this ) );
+	{ 
+		return key_exists( $this->_withPrefix( $name ), get_object_vars( $this ) );
 	}	
 	
 	
@@ -207,6 +209,11 @@ class G2_DataMapper_Domain
 					
 		$property[0] = strtolower( $property[0] );
 		
-		return '_' . $property;
+		return $this->_withPrefix( $property );
+	}
+	
+	private function _withPrefix( $name )
+	{
+		return '_' . $name;
 	}
 }
