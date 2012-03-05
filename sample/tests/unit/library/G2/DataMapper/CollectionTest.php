@@ -69,30 +69,28 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( 3, $this->_collection->getTotal() );
 	}
 	
-	/**
-	 * @group collection-iteration
-	 */
+
 	public function testIteration()
 	{
 		$domain = $this->_collection->current();
 		
 		$this->assertEquals( $this->_data[0], array( 'id' => $domain->getId(), 'name' => $domain->getName() ) );
 		
-//		$this->assertEquals( 0, $this->_collection->key() );
-//		
-//		$this->assertTrue( $this->_collection->valid() );
-//		
-//		
-//		$domain = $this->_collection->next();
-//		
-//		$this->assertEquals( $this->_data[0], array( 'id' => $domain->getId(), 'name' => $domain->getName() ) );
-//		
-//		$this->assertEquals( 1, $this->_collection->key() );
-//		
-//		
-//		$domain = $this->_collection->rewind();
-//		
-//		$this->assertEquals( 0, $this->_collection->key() );
+		$this->assertEquals( 0, $this->_collection->key() );
+		
+		$this->assertTrue( $this->_collection->valid() );
+		
+		
+		$domain = $this->_collection->next();
+		
+		$this->assertEquals( $this->_data[0], array( 'id' => $domain->getId(), 'name' => $domain->getName() ) );
+		
+		$this->assertEquals( 1, $this->_collection->key() );
+		
+		
+		$domain = $this->_collection->rewind();
+		
+		$this->assertEquals( 0, $this->_collection->key() );
 	}
 		
 	

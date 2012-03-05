@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @group user-domain
  * @group domain
  */
 class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
@@ -36,9 +35,7 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
     	$this->assertTrue( isset( $this->_user->name ) );	
     }
     
-    /**
-     * @group domain-magic-call
-     */
+
     public function testMagicCall()
     {
     	$lastName = 'Gomboc';
@@ -50,7 +47,7 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
     	$this->assertEquals( $lastName, $this->_user->getLastName() );
     }
      
-    
+
     public function testSetFromArray()
     {
     	$data = array (

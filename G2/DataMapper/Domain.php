@@ -102,6 +102,7 @@ class G2_DataMapper_Domain
 			foreach ( $data as $key => $value ) {
 				
 				if( !is_null( $value ) ) {
+					
 					$this->setProperty( $this->_underscoreToCamelCase( $key ), $value );
 				}
 			}
@@ -136,7 +137,7 @@ class G2_DataMapper_Domain
 	 */
 	public function setProperty( $property, $value ) 
 	{	
-		$paramName = $this->_withPrefix( $property );
+		$paramName = $this->_addPrefix( $property );
 
 		if ( property_exists( get_class( $this), $paramName ) ) {	
 			$this->$paramName = $value;
@@ -173,7 +174,7 @@ class G2_DataMapper_Domain
 	public function __call( $method, $args )
 	{		
         $methodType = substr( $method, 0, 3 );
-        $paramName = $this->_withPrefix( strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 ) );
+        $paramName = $this->_addPrefix( strtolower( substr( $method, 3, 1 ) ) . substr( $method, 4 ) );
        
         switch( $methodType ) {
             case 'set':
@@ -189,7 +190,7 @@ class G2_DataMapper_Domain
 	
 	public function __isset( $name )
 	{ 
-		return key_exists( $this->_withPrefix( $name ), get_object_vars( $this ) );
+		return key_exists( $this->_addPrefix( $name ), get_object_vars( $this ) );
 	}	
 	
 	
@@ -209,10 +210,10 @@ class G2_DataMapper_Domain
 					
 		$property[0] = strtolower( $property[0] );
 		
-		return $this->_withPrefix( $property );
+		return $property;
 	}
 	
-	private function _withPrefix( $name )
+	private function _addPrefix( $name )
 	{
 		return '_' . $name;
 	}
