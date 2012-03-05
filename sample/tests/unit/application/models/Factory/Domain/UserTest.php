@@ -3,14 +3,22 @@
 class Model_Factory_Domain_UserTest extends PHPUnit_Framework_TestCase
 {
 	
-	
 	private $_factoryDomain;
+	
 	
 	public function setUp()
 	{		
 		parent::setUp();
 		
 		$this->_factoryDomain = new Model_Factory_Domain_User();
+	}
+	
+	
+	public function tearDown()
+	{
+		unset( $this->_factoryDomain );
+		
+		parent::tearDown();
 	}
 	
 	

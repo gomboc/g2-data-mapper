@@ -32,6 +32,14 @@ class G2_DataMapper_CollectionTest extends PHPUnit_Framework_TestCase
 		parent::setUp();
 	}
 	
+	
+	public function tearDown()
+	{
+		unset( $this->_collection );
+		
+		parent::tearDown();
+	}
+	
 
 	public function testAssociativeArrayData()
 	{

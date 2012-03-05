@@ -24,7 +24,7 @@ class G2_DataMapper_Identity_FieldTest extends PHPUnit_Framework_TestCase
 	
 	public function tearDown()
 	{
-		unset( $this->_identityField );
+		unset( $this->_identityField, $this->_comps );
 		
 		parent::tearDown();
 	}
