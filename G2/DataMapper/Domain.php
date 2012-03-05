@@ -20,7 +20,7 @@ class G2_DataMapper_Domain
 	 */				
 	public function getMapper()
 	{
-		if ( !$this->isMapperInstance( $this->_mapper ) ) {
+		if ( !$this->_isInstanceOfMapper( $this->_mapper ) ) {
 			
 			$mapperName = str_replace( 'Model_Domain_', 'Model_Mapper_', get_class( $this ) );
 			
@@ -28,12 +28,6 @@ class G2_DataMapper_Domain
 		}
 		
 		return $this->_mapper;
-	}
-	
-	
-	public function isMapperInstance( $mapper )
-	{
-		return !empty( $mapper ) && $mapper instanceof G2_DataMapper_Mapper;
 	}
 	
 
@@ -66,7 +60,7 @@ class G2_DataMapper_Domain
 	{
 		$mapper = $this->getMapper();
 		
-		if ( $this->isMapperInstance() ) {
+		if ( $this->_isInstanceOfMapper() ) {
 			$mapper->update( $this );
 		}		
 
@@ -80,11 +74,11 @@ class G2_DataMapper_Domain
 	{
 		$mapper = $this->getMapper();
 		
-		if ( $this->isMapperInstance( $mapper ) ) {
+		if ( $this->_isInstanceOfMapper( $mapper ) ) {
 			$id = $mapper->insert( $this );
 		}		
 
-		if ( !is_null( $id ) ) {
+		if ( !empty( $id ) ) {
 			$this->setId( $id );
 			G2_DataMapper_Watcher::add( $this );
 		}
@@ -114,7 +108,7 @@ class G2_DataMapper_Domain
 	/**
 	 * @return G2_DataMapper_Domain
 	 */
-	public function setFormData( Zend_Form $form )
+	public function setFromForm( Zend_Form $form )
 	{
 		if ( !$form->valid() ) {
 			throw new Exception( 'Form not valid', 1001 );
@@ -124,8 +118,9 @@ class G2_DataMapper_Domain
 		
 		return $this;
 	}
+	
 
-	public function setMapper( Model_Mapper $mapper )
+	public function setMapper( G2_DataMapper_Mapper $mapper )
 	{
 		$this->_mapper = $mapper;
 		
@@ -194,11 +189,23 @@ class G2_DataMapper_Domain
 	}	
 	
 	
+	private function _addPrefix( $name )
+	{
+		return '_' . $name;
+	}
+	
+	
 	private function _camelCaseToUnderscore( $name )
 	{
 		$filter = new Zend_Filter_Word_CamelCaseToUnderscore();
 			
 		return substr( strtolower( $filter->filter( $name ) ), 1 );
+	}
+	
+	
+	private function _isInstanceOfMapper( $mapper )
+	{
+		return !empty( $mapper ) && $mapper instanceof G2_DataMapper_Mapper;
 	}
 	
 	
@@ -211,10 +218,5 @@ class G2_DataMapper_Domain
 		$property[0] = strtolower( $property[0] );
 		
 		return $property;
-	}
-	
-	private function _addPrefix( $name )
-	{
-		return '_' . $name;
 	}
 }

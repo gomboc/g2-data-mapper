@@ -6,6 +6,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	
 	protected function _initAutoload()
 	{
+		$autoloader = Zend_Loader_Autoloader::getInstance();
+		
 		// Rewriting mapper basepath
 		$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
         	'basePath'      => APPLICATION_PATH,
@@ -17,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 				),          
 		)));
 		
-		$autoloader = Zend_Loader_Autoloader::getInstance();
+		$autoloader->pushAutoloader( $resourceLoader );
 		
 		//Module autoloader
 		$moduleAutoloader = new Zend_Application_Module_Autoloader(array(

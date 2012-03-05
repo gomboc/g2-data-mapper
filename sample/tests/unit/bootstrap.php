@@ -30,4 +30,16 @@
 	
 	$autoloader->pushAutoloader( $moduleAutoloader );
 	
+	$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
+        	'basePath'      => APPLICATION_PATH,
+          	'namespace'     => '',
+          	'resourceTypes' => array(
+				'mappers' => array(
+					'path'      => 'models/Mapper',
+					'namespace' => 'Model_Mapper',
+				),          
+		)));
+		
+	$autoloader->pushAutoloader( $resourceLoader );
+
 	require_once 'G2/DataMapper.php';

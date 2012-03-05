@@ -26,6 +26,18 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
     }
     
     
+    public function testIdGetterAndSetter()
+    {
+    	$user = new Model_Domain_User( 1 );
+
+    	$this->assertEquals( 1, $user->getId() );
+    	
+    	$this->_user->setId( 2 );
+    	
+    	$this->assertEquals( 2, $this->_user->getId() );
+    }
+    
+    
     public function testIsset()
     {
     	$this->assertTrue( isset( $this->_user->name ) );
@@ -45,6 +57,16 @@ class Model_Domain_UserTest extends PHPUnit_Framework_TestCase
     	$this->_user->setLastName( $lastName );
     	
     	$this->assertEquals( $lastName, $this->_user->getLastName() );
+    }
+    
+    
+    public function testMapperGetterAndSetter()
+    {    	
+    	$this->assertInstanceOf( 'Model_Mapper_User', $this->_user->getMapper() );
+
+    	$this->_user->setMapper( new Model_Mapper_Client() );
+    	
+    	$this->assertInstanceOf( 'Model_Mapper_Client', $this->_user->getMapper() );
     }
      
 
