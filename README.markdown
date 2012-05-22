@@ -30,5 +30,14 @@ The following two commands (which you may have to run as `root`) are all that is
 
 After the installation you can find the DataMapper source files inside your local PEAR directory; the path is usually `/usr/share/php/< to be decided >`.
 
+Running Tests
+-------------
+
+To run the test suite you need to install [PHPUnit](https://github.com/sebastianbergmann/phpunit).
+
+Run unit tests:
+
+	phpunit -c sample/tests/unit/phpunit.xml
+
 Documentation
 -------------
