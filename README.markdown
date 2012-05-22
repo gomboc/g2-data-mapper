@@ -32,9 +32,9 @@ After the installation you can find the DataMapper source files inside your loca
 Running Tests
 -------------
 
-To run the test suite you need to install [PHPUnit](https://github.com/sebastianbergmann/phpunit).
+To run the test suite you have to install [PHPUnit](https://github.com/sebastianbergmann/phpunit).
 
-Run unit tests:
+Run the unit tests with the following command:
 
 	phpunit -c example/tests/unit/phpunit.xml
 
