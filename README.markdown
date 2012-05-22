@@ -1,4 +1,3 @@
-
 DataMapper
 ==========
 
@@ -37,7 +36,7 @@ To run the test suite you need to install [PHPUnit](https://github.com/sebastian
 
 Run unit tests:
 
-	phpunit -c sample/tests/unit/phpunit.xml
+	phpunit -c example/tests/unit/phpunit.xml
 
 Documentation
 -------------
