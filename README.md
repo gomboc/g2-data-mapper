@@ -1,7 +1,7 @@
-DataMapper
-==========
+G2 DataMapper
+=============
 
-DataMapper is an object-relational mapper library written in PHP.
+G2 DataMapper is an object-relational mapper library written in PHP.
 
 Contributors
 ------------
