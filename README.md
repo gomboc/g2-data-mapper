@@ -51,7 +51,7 @@ Documentation
 Make sure than your local PEAR directory is in your include_path.
 
 Add domain and mapper files to your project.
- .
+ 	.
     |-- application
        	|-- models
             |-- Domain
@@ -64,23 +64,16 @@ Add domain and mapper files to your project.
             	
 Model_Domain_User
 
-	<?php 
-	
 	class Model_Domain_User extends G2_DataMapper_Domain
 	{
 		
 		protected $_email;
 		
 		protected $_name;
-		
-		protected $_lastName;
-			
 	}        
 	
 Model_Factory_Domain_User	
 
-	<?php 
-	
 	class Model_Factory_Domain_User extends G2_DataMapper_Factory_Domain
 	{
 		
@@ -88,8 +81,6 @@ Model_Factory_Domain_User
 
 Model_Mapper_User
 
-	<?php 
-	
 	class Model_Mapper_User extends G2_DataMapper_Mapper
 	{
 		
@@ -101,8 +92,6 @@ Model_Mapper_User
 			'name',
 			'email'
 		);
-		
-		
 	}
 
 Add to your Bootstrap file:
@@ -111,7 +100,7 @@ Add to your Bootstrap file:
 		
 	new G2_DataMapper( $this->getPluginResource( 'db' )->getDbAdapter() );
 
-Find one
+findOne
 	
 	$mapper = new Model_Mapper_User(); 
 		
@@ -119,10 +108,10 @@ Find one
 		
 	$domain = $mapper->findOne( $identity );
 
-Insert
+insert
 		
 	$domain = new Model_Domain_User();
-	$domain->setName('ivan')->setEmail('gmail');
+	$domain->setName('name')->setEmail('gmail');
 	
 	$domain->saveNew();
 		
