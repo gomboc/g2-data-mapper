@@ -52,15 +52,15 @@ Make sure than your local PEAR directory is in your include_path.
 
 Add domain and mapper files to your project.
  .
-    `-- application
-        `-- models
+    |-- application
+       	|-- models
             |-- Domain
             |	`--User.php
             |-- Factory
             |	`-- Domain
             |		`-- User.php
-            `-- Mapper
-            	`--User.php
+            |-- Mapper
+            	|--User.php
             	
 Model_Domain_User
 
