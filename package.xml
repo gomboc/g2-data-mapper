@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.8.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+	http://pear.php.net/dtd/tasks-1.0.xsd
+	http://pear.php.net/dtd/package-2.0
+	http://pear.php.net/dtd/package-2.0.xsd">
+	<name>G2_DataMapper</name>
+	<channel>gomboc.github.com/pear</channel>
+ 	<summary>G2 DataMapper is an object-relational mapper library written in PHP.</summary>
+ 	<description>G2 DataMapper is an object-relational mapper library written in PHP.</description>
+ 	<lead>
+	  	<name>Draško Gomboc</name>
+	  	<user>dg</user>
+	  	<email>drasko.gomboc@gmail.com</email>
+	  	<active>yes</active>
+ 	</lead>
+ 	<date>2012-06-01</date>
+	<version>
+		<release>1.0.0</release>
+		<api>1.0.0</api>
+ 	</version>
+ 	<stability>
+  		<release>stable</release>
+  		<api>stable</api>
+ 	</stability>
+ 	<license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>
+ 	<notes>-</notes>
+	<contents>
+   		<dir name="/">
+   			<dir name="G2">
+				<dir name="DataMapper">
+					<dir name="Factory">
+						<file baseinstalldir="/" name="Domain.php" role="php">
+	       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+	      				</file>
+					</dir>
+					<dir name="Identity">
+						<file baseinstalldir="/" name="Field.php" role="php">
+	       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+	      				</file>
+					</dir>
+					<file baseinstalldir="/" name="Autoloader.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+      				<file baseinstalldir="/" name="Collection.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+      				<file baseinstalldir="/" name="Domain.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+      				<file baseinstalldir="/" name="Identity.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+      				<file baseinstalldir="/" name="Mapper.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+      				<file baseinstalldir="/" name="Selection.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+      				<file baseinstalldir="/" name="Watcher.php" role="php">
+       					<tasks:replace from="@package_version@" to="version" type="package-info" />
+      				</file>
+				</dir>
+  				<file baseinstalldir="/" name="DataMapper.php" role="php">
+   					<tasks:replace from="@package_version@" to="version" type="package-info" />
+  				</file>
+     		</dir>
+    		<file baseinstalldir="/" name="README.md" role="doc"/>
+   		</dir>
+ 	</contents>
+ 	<dependencies>
+  		<required>
+   			<php>
+    			<min>5.0.0</min>
+   			</php>
+   			<pearinstaller>
+    			<min>1.4.0</min>
+   			</pearinstaller>
+		</required>
+ 	</dependencies>
+	<phprelease />
+</package>

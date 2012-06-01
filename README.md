@@ -25,9 +25,9 @@ Depending on your OS distribution and/or your PHP environment, you may need to i
 The following two commands (which you may have to run as `root`) are all that is required to install G2 DataMapper using the PEAR Installer:
 
     pear channel-discover gomboc.github.com/pear
-    pear install g2/< to be decided >
+    pear pear install g2/G2_DataMapper
 
-After the installation you can find the G2 DataMapper source files inside your local PEAR directory; the path is usually `/usr/share/php/< to be decided >`.
+After the installation you can find the G2 DataMapper source files inside your local PEAR directory; the path is usually `/usr/share/php/G2`.
 
 Running Tests
 -------------
@@ -40,3 +40,82 @@ Run the unit tests with the following command:
 
 Documentation
 -------------
+
+Make sure than your local PEAR directory is in your include_path.
+
+Add domain and mapper files to your project.
+ .
+    `-- application
+        `-- models
+            |-- Domain
+            |	`--User.php
+            |-- Factory
+            |	`-- Domain
+            |		`-- User.php
+            `-- Mapper
+            	`--User.php
+            	
+Model_Domain_User
+
+	<?php 
+	
+	class Model_Domain_User extends G2_DataMapper_Domain
+	{
+		
+		protected $_email;
+		
+		protected $_name;
+		
+		protected $_lastName;
+			
+	}        
+	
+Model_Factory_Domain_User	
+
+	<?php 
+	
+	class Model_Factory_Domain_User extends G2_DataMapper_Factory_Domain
+	{
+		
+	}    	
+
+Model_Mapper_User
+
+	<?php 
+	
+	class Model_Mapper_User extends G2_DataMapper_Mapper
+	{
+		
+		protected $_indentityField = 'id';
+		
+		protected $_table = 'user';
+		
+		protected $_columns = array(
+			'name',
+			'email'
+		);
+		
+		
+	}
+
+Add to your Bootstrap file:
+
+	require_once 'G2/DataMapper.php';
+		
+	new G2_DataMapper( $this->getPluginResource( 'db' )->getDbAdapter() );
+
+Find one
+	
+	$mapper = new Model_Mapper_User(); 
+		
+	$identity = $mapper->getIdentity()->field( 'user.id' )->eq( 1 );
+		
+	$domain = $mapper->findOne( $identity );
+
+Insert
+		
+	$domain = new Model_Domain_User();
+	$domain->setName('ivan')->setEmail('gmail');
+	
+	$domain->saveNew();
+		
