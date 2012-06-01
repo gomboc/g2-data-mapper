@@ -25,7 +25,7 @@ Depending on your OS distribution and/or your PHP environment, you may need to i
 The following two commands (which you may have to run as `root`) are all that is required to install G2 DataMapper using the PEAR Installer:
 
     pear channel-discover gomboc.github.com/pear
-    pear pear install g2/G2_DataMapper
+    pear install g2/G2_DataMapper
 
 After the installation you can find the G2 DataMapper source files inside your local PEAR directory; the path is usually `/usr/share/php/G2`.
 
