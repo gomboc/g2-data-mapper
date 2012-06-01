@@ -51,22 +51,23 @@ Documentation
 Make sure than your local PEAR directory is in your include_path.
 
 Add domain and mapper files to your project.
+
  	.
     |-- application
-       	|-- models
-            |-- Domain
-            |	`--User.php
-            |-- Factory
-            |	`-- Domain
-            |		`-- User.php
-            |-- Mapper
-            	|--User.php
+    |  	|-- models
+    |       |-- Domain
+    |       |	`--User.php
+    |       |-- Factory
+    |       |	`-- Domain
+    |       |		`-- User.php
+    |       |-- Mapper
+    |       	|--User.php
             	
 Model_Domain_User
 
 	class Model_Domain_User extends G2_DataMapper_Domain
 	{
-		
+
 		protected $_email;
 		
 		protected $_name;
@@ -83,7 +84,7 @@ Model_Mapper_User
 
 	class Model_Mapper_User extends G2_DataMapper_Mapper
 	{
-		
+
 		protected $_indentityField = 'id';
 		
 		protected $_table = 'user';
@@ -103,7 +104,6 @@ Add to your Bootstrap file:
 findOne
 	
 	$mapper = new Model_Mapper_User(); 
-		
 	$identity = $mapper->getIdentity()->field( 'user.id' )->eq( 1 );
 		
 	$domain = $mapper->findOne( $identity );
