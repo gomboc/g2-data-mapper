@@ -36,15 +36,6 @@ Remove package (run as root):
 
 	$ pear uninstall g2/G2_DataMapper
 
-Running Tests
--------------
-
-To run the test suite you have to install [PHPUnit](https://github.com/sebastianbergmann/phpunit).
-
-Run the unit tests with the following command:
-
-	phpunit -c example/tests/unit/phpunit.xml
-
 Documentation
 -------------
 
@@ -114,8 +105,17 @@ insert
 	$domain->setName('name')->setEmail('gmail');
 	
 	$domain->saveNew();
+
+Development
+-----------
+
+To run the test suite you have to install [PHPUnit](https://github.com/sebastianbergmann/phpunit).
+
+Run the unit tests with the following command:
+
+	phpunit -c example/tests/unit/phpunit.xml
 		
-Licence
+License
 -------
 
 Copyright (c) 2012 Draško Gomboc
