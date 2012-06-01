@@ -15,8 +15,8 @@ Requirements
 * PHP 5.2 (or later) but PHP 5.3 (or later) is highly recommended.
 * Zend Framework 1.9 (or later)
 
-Installation
-------------
+Install
+-------
 
 G2 DataMapper should be installed using the PEAR Installer, the backbone of the [PHP Extension and Application Repository](http://pear.php.net/) that provides a distribution system for PHP packages.
 
@@ -28,6 +28,13 @@ The following two commands (which you may have to run as `root`) are all that is
     pear pear install g2/G2_DataMapper
 
 After the installation you can find the G2 DataMapper source files inside your local PEAR directory; the path is usually `/usr/share/php/G2`.
+
+Uninstall
+---------
+
+Remove package (run as root):
+
+	$ pear uninstall g2/G2_DataMapper
 
 Running Tests
 -------------
