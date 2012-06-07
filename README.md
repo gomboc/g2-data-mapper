@@ -18,17 +18,15 @@ Requirements
 Install
 -------
 
-G2 DataMapper should be installed using the PEAR Installer, the backbone of the [PHP Extension and Application Repository](http://pear.php.net/) that provides a distribution system for PHP packages.
+G2 DataMapper should be installed using the PEAR Installer ([PHP Extension and Application Repository](http://pear.php.net/)). 
 
-Depending on your OS distribution and/or your PHP environment, you may need to install PEAR or update your existing PEAR installation before you can proceed with the following instructions. `sudo pear upgrade PEAR` usually suffices to upgrade an existing PEAR installation. The [PEAR Manual ](http://pear.php.net/manual/en/installation.getting.php) explains how to perform a fresh installation of PEAR.
+The following two commands (which you may have to run as `root`) are all that is required to install package using the PEAR Installer:
 
-The following two commands (which you may have to run as `root`) are all that is required to install G2 DataMapper using the PEAR Installer:
+    $ pear channel-discover gomboc.github.com/pear
+    $ pear install g2/G2_DataMapper
 
-    pear channel-discover gomboc.github.com/pear
-    pear install g2/G2_DataMapper
-
-After the installation you can find the G2 DataMapper source files inside your local PEAR directory; the path is usually `/usr/share/php/G2`.
-
+After the installation you can find the source files inside your local PEAR directory; the path is usually `/usr/share/php/G2`.
+	
 Uninstall
 ---------
 
